@@ -5,7 +5,7 @@ on:
     - main
 env:
   AZURE_FUNCTIONAPP_NAME: fridaycheck
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: .
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: ./published
   AZURE_FUNCTIONAPP_PUBLISH_PROFILE: ${{ secrets.FRIDAYCHECK_PUBLISH_PROFILE }}
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 3.1.x
@@ -20,12 +20,12 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
-    - name: Resolve project
-      run: dotnet restore "${{ env.PROJECT_PATH }}" --configuration ${{ env.CONFIGURATION }} 
-    - name: Build project
+    - name: Restore packages
+      run: dotnet restore "${{ env.PROJECT_PATH }}"
+    - name: Build app
       run: dotnet build "${{ env.PROJECT_PATH }}" --configuration ${{ env.CONFIGURATION }} --no-restore
-    - name: Publish project
-      run: dotnet publish "${{ env.PROJECT_PATH }}" --configuration ${{ env.CONFIGURATION }} --no-build --output ./output
+    - name: Publish app for deploy
+      run: dotnet publish "${{ env.PROJECT_PATH }}" --configuration ${{ env.CONFIGURATION }} --no-build --output ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
     - name: Run Azure Functions Action
       uses: Azure/functions-action@v1
       with:
