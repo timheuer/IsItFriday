@@ -21,13 +21,7 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
     - name: Resolve Project Dependencies Using Dotnet
-      run: >
-        pushd "./${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}"
-
-        dotnet build "{{ env.PROJECT_PATH }}" --configuration ${{ env.CONFIGURATION }} --output "./output"
-
-        popd
-      shell: pwsh
+      run: dotnet build "{{ env.PROJECT_PATH }}" --configuration ${{ env.CONFIGURATION }} --output "./output"
     - name: Run Azure Functions Action
       uses: Azure/functions-action@v1
       with:
