@@ -20,8 +20,12 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
-    - name: Resolve Project Dependencies Using Dotnet
-      run: dotnet build IsItFriday --configuration ${{ env.CONFIGURATION }} --output "./output"
+    - name: Resolve project
+      run: dotnet restore "${{ env.PROJECT_PATH }}" --configuration ${{ env.CONFIGURATION }} 
+    - name: Build project
+      run: dotnet build "${{ env.PROJECT_PATH }}" --configuration ${{ env.CONFIGURATION }} --no-restore
+    - name: Publish project
+      run: dotnet publish "${{ env.PROJECT_PATH }}" --configuration ${{ env.CONFIGURATION }} --no-build --output ./output
     - name: Run Azure Functions Action
       uses: Azure/functions-action@v1
       with:
