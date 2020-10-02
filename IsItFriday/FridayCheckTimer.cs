@@ -18,7 +18,7 @@ namespace IsItFriday
     public static class FridayCheckTimer
     {
         [FunctionName("FridayCheckTimer")]
-        public static void Run([TimerTrigger("0 0 10 * * *")]TimerInfo myTimer, ILogger log, ExecutionContext context)
+        public static void Run([TimerTrigger("0 0 17 * * *")]TimerInfo myTimer, ILogger log, ExecutionContext context)
         {
             var config = new ConfigurationBuilder()
                 .SetBasePath(context.FunctionAppDirectory)
