@@ -30,7 +30,7 @@ namespace IsItFriday
             string dayStatement = "Checking to see if it is Friday...";
 
             // check to see if it is a friday
-            var today = DateTime.Now;
+            var today = DateTime.Now.ToUniversalTime().AddHours(-7);
 
             switch (today.DayOfWeek)
             {
