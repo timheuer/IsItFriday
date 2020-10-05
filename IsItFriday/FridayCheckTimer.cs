@@ -1,12 +1,6 @@
 using System;
-using System.IO;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using GiphyDotNet.Manager;
 using GiphyDotNet.Model.Parameters;
 using System.Net;
@@ -18,7 +12,7 @@ namespace IsItFriday
     public static class FridayCheckTimer
     {
         [FunctionName("FridayCheckTimer")]
-        public static void Run([TimerTrigger("0 0 17 * * *")]TimerInfo myTimer, ILogger log, ExecutionContext context)
+        public static void Run([TimerTrigger("0 0 16 * * *")]TimerInfo myTimer, ILogger log, ExecutionContext context)
         {
             var config = new ConfigurationBuilder()
                 .SetBasePath(context.FunctionAppDirectory)
