@@ -60,7 +60,7 @@ namespace IsItFriday
             var gifresult = await g.RandomGif(new RandomParameter()
             {
                 Tag = term,
-                Rating = Rating.Pg13
+                Rating = Rating.Pg
             });
 
             var url = gifresult.Data.ImageUrl;
